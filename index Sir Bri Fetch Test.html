@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polygon</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+<!--     <script type="text/javascript" src="bulacan.json"></script>
+    <script type="text/javascript" src="laguna.json"></script>
+    <script type="text/javascript" src="cebu.json"></script> -->
+
+
+
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: {lat: 12.8797, lng: 121.7740}, //ABRA: {lat: 120.552, lng: 17.735} || ORIG: {lat: 24.886, lng: -70.268}
+          mapTypeId: 'roadmap'
+        });
+
+        // Define the LatLng coordinates for the polygon's path.
+        var triangleCoords = [
+          {lat: 25.774, lng: -80.190},
+          {lat: 18.466, lng: -66.118},
+          {lat: 32.321, lng: -64.757},
+          {lat: 25.774, lng: -80.190}
+        ];
+
+        // let abraAsJson = "" //get data somewhere out there
+        // fetch('https://raw.githubusercontent.com/khellytaguinod/javascriptEx/master/abra.json', { mode: 'no-cors' }).then(function(response) {
+          
+        //   abraAsJson = response.json()
+         
+        //   // var abraCoords = JSON.parse(abraAsJson) 
+        //   console.log(abraAsJson)
+
+        // }).catch(function(err) {
+        //   // Error :(
+        // });
+        //var abraCoords = JSON.parse(abra)
+
+        // fetch('https://raw.githubusercontent.com/khellytaguinod/javascriptEx/master/abra.json' , { mode: 'no-cors' }).then(function(response) {
+        //     // Your code for handling the data you get from the API
+
+        //     abraAsJson = response.json()
+        //     console.log(abraAsJson)
+
+        // })
+        // .catch(function(err) {
+        //     // This is where you run code if the server returns any errors
+        //     console.log("Oops, we haven't got JSON!");
+        // });
+
+        // fetch a single shape
+        // fetch('https://raw.githubusercontent.com/khellytaguinod/javascriptEx/master/abra.json')
+        //   .then(response => response.json())
+        //   .then(abra => {
+        //     // Here's a list of repos!
+
+        //     var abraShape = new google.maps.Polygon({
+        //       paths: abra,
+        //       strokeColor: '#FF0000',
+        //       strokeOpacity: 0.8,
+        //       strokeWeight: 2,
+        //       fillColor: '#FF0000',
+        //       fillOpacity: 0.35
+        //     });
+        //     abraShape.setMap(map); 
+        //     //console.log(abra)
+        //   });
+
+
+
+
+        // fetch an array of shapes
+        fetch('https://raw.githubusercontent.com/khellytaguinod/carmidterms/master/multipleShape.json')
+          .then(response => response.json())
+          .then(shapes => {
+
+            shapes.forEach( shapeCoords => {
+
+
+
+              let shape = new google.maps.Polygon({
+              paths: shapeCoords,
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35
+              });
+              
+              shape.setMap(map); 
+            })
+
+
+
+            //console.log(abra)
+          });
+
+        // var bulCoords = JSON.parse(bulacan)
+        // var lagunaCoords = JSON.parse(laguna)
+        // var cebuCoords = JSON.parse(cebu)
+
+        // Construct the polygon.
+        // var ABRA = new google.maps.Polygon({
+        //   paths: abraCoords,
+        //   strokeColor: '#FF0000',
+        //   strokeOpacity: 0.8,
+        //   strokeWeight: 2,
+        //   fillColor: '#FF0000',
+        //   fillOpacity: 0.35
+        // });
+        // ABRA.setMap(map); 
+
+        // var BULACAN = new google.maps.Polygon({
+        //   paths: abraAsJson,
+        //   strokeColor: 'green',
+        //   strokeOpacity: 0.8,
+        //   strokeWeight: 2,
+        //   fillColor: 'green',
+        //   fillOpacity: 0.35
+        // });
+
+        //  var LAGUNA = new google.maps.Polygon({
+        //   paths: lagunaCoords,
+        //   strokeColor: 'blue',
+        //   strokeOpacity: 0.8,
+        //   strokeWeight: 2,
+        //   fillColor: 'blue',
+        //   fillOpacity: 0.35
+        // });
+
+        //  var CEBU = new google.maps.Polygon({
+        //   paths: cebuCoords,
+        //   strokeColor: '#221c72',
+        //   strokeOpacity: 0.8,
+        //   strokeWeight: 2,
+        //   fillColor: '#221c72',
+        //   fillOpacity: 0.35
+        // });
+
+
+
+        
+        // BULACAN.setMap(map);
+        // LAGUNA.setMap(map);
+        // CEBU.setMap(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl32dSXGt7MYeJnkofk4mARVT4VUF5Poo&callback=initMap">
+    </script>
+  </body>
+</html>
